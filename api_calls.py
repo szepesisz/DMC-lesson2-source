@@ -2,8 +2,12 @@ import base64
 from urllib.request import urlopen
 import requests
 from posixpath import join as urljoin
+import configparser
 
-# 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
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
 
 def task_1():
     url_base = 'https://www.random.org/'
@@ -60,7 +64,7 @@ def task_4():
 
 def task_5():
     label = 'kutya'
-    access_key = '85b9b293c84910a3d9f087dbf8b86802'
+    access_key = config.get('moly', 'key')
     url = 'https://moly.hu/api/books.json'
     r = requests.get(
         url=url,
@@ -73,8 +77,8 @@ def task_5():
 
 
 def task_6():
-    CLIENT_ID = 'bbc4b3b81dbe40cdbb6e69476267adc0'
-    CLIENT_SECRET = '65516cac54df4e96a435ea318223fcea'
+    CLIENT_ID = config.get('spotify', 'id')
+    CLIENT_SECRET = config.get('spotify', 'secret')
 
     artist = 'Krúbi'
 
@@ -154,6 +158,6 @@ if __name__ == '__main__':
     # task_2()
     # task_3()
     # task_4()
-    # task_5()
-    task_6()
+    task_5()
+    # task_6()
     # task_7()
